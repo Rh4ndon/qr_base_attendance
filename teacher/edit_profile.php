@@ -59,6 +59,7 @@
                                     <input type="hidden" name="user_id" value="<?php echo $row_teacher['user_id']; ?>">
                                     
                                         <div class="form-group">
+                                            <label for="firstname">First Name</label>
                                             <input type="text" class="form-control form-control-user"
                                                 value="<?php echo $row_teacher['firstname']; ?>"
                                                 name="firstname"
@@ -66,6 +67,7 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label for="lastname">Last Name</label>
                                             <input type="text" class="form-control form-control-user"
                                                 value="<?php echo $row_teacher['lastname']; ?>"
                                                 name="lastname"
@@ -73,6 +75,7 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label for="email">Email</label>
                                             <input type="email" class="form-control form-control-user"
                                                 value="<?php echo $row_teacher['email']; ?>"
                                                 name="email"
@@ -80,6 +83,7 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label for="password">Password</label>
                                             <input type="password" class="form-control form-control-user"
                                                 value="<?php echo $row_teacher['password']; ?>"
                                                 name="password"
@@ -87,6 +91,7 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label for="gender">Gender/label>
                                             <select type="text" class="form-control form-control-user"
                                                 name="gender"> 
                                                 <option><?php echo $row_teacher['gender']; ?></option>
@@ -96,6 +101,7 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label for="Contact Information">Contact Information</label>
                                             <input type="text" class="form-control form-control-user"
                                                 value="<?php echo $row_teacher['contact']; ?>"
                                                 name="contact"
@@ -103,6 +109,7 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label for="department">Department</label>
                                             <input type="text" class="form-control form-control-user"
                                                 value="<?php echo $row_teacher['department']; ?>"
                                                 name="department"
@@ -110,6 +117,7 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label for="birthday">Birthday</label>
                                             <input type="date" class="form-control form-control-user"
                                                 value="<?php echo $row_teacher['birthday']; ?>"
                                                 name="birthday"

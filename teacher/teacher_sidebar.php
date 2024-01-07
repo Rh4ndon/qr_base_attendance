@@ -41,15 +41,6 @@
               
             </li>        
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" 
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Our Team</span>
-                </a>
-               
-            </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
