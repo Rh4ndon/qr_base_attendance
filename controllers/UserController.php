@@ -23,8 +23,8 @@ if (isset($_POST['register'])) {
     <?php
     }else{
 
-    mysqli_query($conn,"insert into teachers (email,firstname,lastname,password,gender,contact,department,birthday)
-    values ('$email','$firstname','$lastname','$password','$gender','$contact','$department','$birthday')") or die(mysqli_error()); 
+    mysqli_query($conn,"insert into teachers (email,firstname,lastname,password,gender,contact,department,birthday,picture)
+    values ('$email','$firstname','$lastname','$password','$gender','$contact','$department','$birthday','undraw_profile.svg')") or die(mysqli_error()); 
 
       /* teacher */
 		$query_teacher = mysqli_query($conn,"SELECT * FROM teachers WHERE email='$email' AND password='$password'")or die(mysqli_error());
@@ -48,6 +48,8 @@ if (isset($_POST['update'])) {
     $contact = $_POST['contact'];
     $department = $_POST['department'];
     $birthday = $_POST['birthday'];
+    $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+  
 
         /* admin */
 			$query = "SELECT * FROM users WHERE user_id ='$user_id'";
@@ -60,15 +62,29 @@ if (isset($_POST['update'])) {
 		$num_row_teacher = mysqli_num_rows($query_teacher);
 		
 		if( $num_row > 0 ) {
+            
+            $image_name = addslashes($_FILES['image']['name']);
+            $image_size = getimagesize($_FILES['image']['tmp_name']);
 
-        mysqli_query($conn,"update users set firstname = '$firstname' , lastname = '$lastname' , email = '$email', password = '$password', gender ='$gender', contact = '$contact', department = '$department', birthday = '$birthday' where user_id = '$user_id' ")or die(mysqli_error());
+            move_uploaded_file($_FILES["image"]["tmp_name"], "../img/" . $_FILES["image"]["name"]);
+            $location = "../img/" . $_FILES["image"]["name"];
+
+        mysqli_query($conn,"update users set firstname = '$firstname' , lastname = '$lastname' , email = '$email', password = '$password', gender ='$gender', contact = '$contact', department = '$department', birthday = '$birthday', picture = '$image_name' where user_id = '$user_id' ")or die(mysqli_error());
 
         session_start();
 		$_SESSION['id']=$row['user_id'];
 		echo "<script> location.href='../admin/profile.php'; </script>";
         exit();	
 		}else if ($num_row_teacher > 0){
-        mysqli_query($conn,"update teachers set firstname = '$firstname' , lastname = '$lastname' , email = '$email', password = '$password', gender ='$gender', contact = '$contact', department = '$department', birthday = '$birthday' where user_id = '$user_id' ")or die(mysqli_error());
+
+            
+            $image_name = addslashes($_FILES['image']['name']);
+            $image_size = getimagesize($_FILES['image']['tmp_name']);
+
+            move_uploaded_file($_FILES["image"]["tmp_name"], "../img/" . $_FILES["image"]["name"]);
+            $location = "../img/" . $_FILES["image"]["name"];
+
+        mysqli_query($conn,"update teachers set firstname = '$firstname' , lastname = '$lastname' , email = '$email', password = '$password', gender ='$gender', contact = '$contact', department = '$department', birthday = '$birthday', picture = '$image_name' where user_id = '$user_id' ")or die(mysqli_error());
         
         session_start();
 		$_SESSION['id']=$row_teahcer['user_id'];
@@ -76,7 +92,7 @@ if (isset($_POST['update'])) {
         exit();	
 		
 		 }else{ 
-            echo "<script> location.href='index.php?msg=failed'; </script>";
+            echo "<script> location.href='../index.php?msg=failed'; </script>";
 		}
 
 }
@@ -108,7 +124,7 @@ if (isset($_POST['login'])) {
         exit();	
 		
 		 }else{ 
-            echo "<script> location.href='index.php?msg=failed'; </script>";
+            echo "<script> location.href='../index.php?msg=failed'; </script>";
 		}
 
 }

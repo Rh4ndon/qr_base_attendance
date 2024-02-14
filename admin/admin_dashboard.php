@@ -21,6 +21,7 @@
 
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/clock.css" rel="stylesheet">
 
 </head>
 
@@ -50,6 +51,53 @@
                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Hello <?php echo $row_admin['firstname']; ?> <?php echo $row_admin['lastname']; ?></h1>
                        
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            
+                            <div class="wrapper">
+                                <div class="display">
+                                <div id="time"></div>
+                                </div>
+                                <span></span>
+                                <span></span>
+                            </div>
+        <script>
+           setInterval(()=>{
+            const time = document.querySelector("#time");
+            let date = new Date();
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+            if(hours > 12){
+                day_night = "PM";
+               hours = hours - 12;     
+               
+            }
+            if(hours < 10){
+              hours = "0" + hours; 
+            }
+            if(minutes < 10){
+               minutes = "0" + minutes; 
+            }
+            if(seconds < 10){
+               seconds = "0" + seconds; 
+            }
+
+            time.textContent = hours + ":" + minutes + ":" + seconds + " " + day_night;
+           });
+        </script>
+
+
+                        </div>
+
+
+
+                        <div class="card-body">
+                            <center><img class="qr" src="BNHS2024.png"></center>
+                        </div>
+
                     </div>
                     
 

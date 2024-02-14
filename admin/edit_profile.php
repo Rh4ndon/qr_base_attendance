@@ -55,9 +55,13 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Profile</h6>
                                 </div>
                                 <div class="card-body">
-                                    <form action="../controllers/UserController.php" method="post" enctype="multipart/form">
+                                    <form action="../controllers/UserController.php" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="user_id" value="<?php echo $row_admin['user_id']; ?>">
-                                    
+                                        <div class="form-group">
+                                        <label for="firstname">Profile Pic</label>
+                                            <input type="file" name="image" class="form-control form-control-user"
+                                                >
+                                        </div>
                                         <div class="form-group">
                                             <label for="firstname">First Name</label>
                                             <input type="text" class="form-control form-control-user"

@@ -11,7 +11,7 @@
     <div class="wrapper">
         <div class="title-text">
           <div class="title login">Login Form
-          <center style="color:red;">
+          <center style="color:red;font-size:15px;">
 						<?php
                             if (isset($_GET["msg"]) && $_GET["msg"] == 'failed') {
                                 echo "Wrong Username / Password";
@@ -66,6 +66,7 @@
               <div class="field">
                 <input name="department" type="text" placeholder="Department/Subject" required>
               </div>
+              
               <div class="field">
                 <input name="birthday" type="date" placeholder="Birthday" required>
               </div>

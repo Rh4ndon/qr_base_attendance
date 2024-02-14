@@ -55,6 +55,11 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Profile</h6>
                                 </div>
                                 <div class="card-body">
+                                        <div class="card-header py-3"><center>
+                                        <img style="height: 200px;" class="img-profile rounded-circle"
+                                            src="../img/<?php echo $row_teacher['picture']; ?>"></center>
+                                            </div>
+                                        
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 value="<?php echo $row_teacher['firstname']; ?> <?php echo $row_teacher['lastname']; ?>"
