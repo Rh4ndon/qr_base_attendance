@@ -46,71 +46,47 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                <div class="row">
-
-                <div class="col-lg-6">
-                    <!-- Basic Card Example -->
-                    <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Profile</h6>
-                                </div>
-                                <div class="card-body">
-                                        <div class="card-header py-3"><center>
-                                        <img style="height: 200px;" class="img-profile rounded-circle"
-                                            src="../img/<?php echo $row_teacher['picture']; ?>"></center>
-                                            </div>
-                                        
-                                        <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                value="<?php echo $row_teacher['firstname']; ?> <?php echo $row_teacher['lastname']; ?>"
-                                                placeholder="Enter Full Name..." disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                value="<?php echo $row_teacher['email']; ?>"
-                                                placeholder="Enter Email Address..." disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                value="<?php echo $row_teacher['gender']; ?>"
-                                                placeholder="Gender" disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                value="<?php echo $row_teacher['contact']; ?>"
-                                                placeholder="Contact Information" disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                value="<?php echo $row_teacher['department']; ?>"
-                                                placeholder="Department" disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="date" class="form-control form-control-user"
-                                                value="<?php echo $row_teacher['birthday']; ?>"
-                                                placeholder="Birthday" disabled>
-                                        </div>
-
-                                        <a href="edit_profile.php" class="btn btn-primary btn-user btn-block">
-                                            Edit
-                                        </a>
-                                </div>
+                 <!-- DataTales Example -->
+                 <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Attendance</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Time In</th>
+                                            <th>Time Out</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                 
+                                    <tbody>
+                                        <?php 
+                                         $query_attendance= mysqli_query($conn,"SELECT date, MIN(time) AS time_in, MAX(time) AS time_out FROM attendance WHERE user_id = '$session_id' GROUP BY date ")or die(mysqli_error());
+                                         while ($row_attendance = mysqli_fetch_array($query_attendance)){?> 
+            
+                                        <tr>
+                                            <td><?php echo $row_teacher['firstname']; ?> <?php echo $row_teacher['lastname']; ?></td>
+                                            <td><?php echo $row_attendance['time_in']; ?></td>
+                                            <td><?php echo $row_attendance['time_out']; ?></td>
+                                            <td><?php echo $row_attendance['date']; ?></td>
+                                        </tr> 
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
                             </div>
-
-
-                </div>
-
-
-                </div>
+                        </div>
+                    </div>
 
                     
-
-                    
+                    <form method="POST"  action="../controllers/ExportTeacher.php">
+                    <input type="hidden" name="user_id" value="<?php echo $row_teacher['user_id']; ?>">
+                    <input type="hidden" name="name" value="<?php echo $row_teacher['lastname']; ?><?php echo $row_teacher['firstname']; ?>">
+                    <button class="btn btn-primary" name="export"type="submit">Export to Xls</button></a>
+                    </form>
 
                           
 

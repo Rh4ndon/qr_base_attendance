@@ -4,7 +4,7 @@
 if (isset($_POST['register'])) {
                            
     $email = $_POST['email'];
-    $firstname = $_POST['firstname'];
+    $firstname = $_POST['firsname'];
     $lastname = $_POST['lastname'];
     $password = $_POST['password'];
     $gender = $_POST['gender'];

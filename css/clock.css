@@ -55,6 +55,13 @@
 }
 
 .qr{
-    width: auto;
-    
+   
+    height: 750px;
 }
+
+@media only screen and (max-width: 768px) {
+    .qr{
+        height: auto;
+        width: 100%;
+    }
+  }
