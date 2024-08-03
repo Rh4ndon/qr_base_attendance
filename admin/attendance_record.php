@@ -1,5 +1,26 @@
-<?php @include '../controllers/session.php'; ?>
-<?php @include '../controllers/AdminController.php'; ?>
+<?php 
+@include '../controllers/session.php'; 
+@include '../controllers/AdminController.php';
+
+if($_GET['department'] == 'ap'){
+    $department = 'ARALING PANLIPUNAN';
+}else if ($_GET['department'] == 'ep'){
+    $department = 'EDUKASYON SA PAGPAPAKATAO';
+}else if ($_GET['department'] == 'eng'){
+    $department = 'ENGLISH';
+}else if ($_GET['department'] == 'fil'){
+    $department = 'FILIPINO';
+}else if ($_GET['department'] == 'mapeh'){
+    $department = 'MAPEH';
+}else if ($_GET['department'] == 'math'){
+    $department = 'MATHEMATICS';
+}else if ($_GET['department'] == 'scie'){
+    $department = 'SCIENCE';
+}else if ($_GET['department'] == 'tle'){
+    $department = 'TLE';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,42 +78,34 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Time In</th>
-                                            <th>Time Out</th>
+                                            <th>AM Arrival</th>
+                                            <th>AM Departure</th>
+                                            <th>PM Arrival</th>
+                                            <th>PM Departure</th>
                                             <th>Date</th>
                                         </tr>
                                     </thead>
                                  
                                     <tbody>
                                         <?php 
-                                         $query_attendance= mysqli_query($conn,"SELECT teachers.firstname, teachers.lastname, attendance.date, MIN(attendance.time) AS time_in, MAX(attendance.time) AS time_out FROM teachers LEFT JOIN attendance ON teachers.user_id = attendance.user_id GROUP BY attendance.user_id, attendance.date ")or die(mysqli_error());
+                                         $query_attendance= mysqli_query($conn,"SELECT teachers.firstname, teachers.lastname, attendance.am_time_in, attendance.am_time_out, attendance.pm_time_in, attendance.pm_time_out, attendance.date FROM teachers LEFT JOIN attendance ON teachers.user_id = attendance.user_id WHERE teachers.department = '$department' ORDER BY attendance.date ASC")or die(mysqli_error());
                                          while ($row_attendance = mysqli_fetch_array($query_attendance)){                    
                                             ?> 
                                         
                                         <tr>
                                             <td><?php echo $row_attendance['firstname']; ?> <?php echo $row_attendance['lastname']; ?></td>
                                             
-                                            <td><?php 
-                                            if ($row_attendance['time_in'] == ''){
-                                                echo 'No time recorded';
-                                            }else{
-                                                echo $row_attendance['time_in'];
-                                            }
-                                             ?>
-                                             </td>
+                                            <td><?php echo $row_attendance['am_time_in']; ?></td>
+                                            <td><?php echo $row_attendance['am_time_out']; ?></td>
+                                            <td><?php echo $row_attendance['pm_time_in']; ?></td>
+                                            <td><?php echo $row_attendance['pm_time_out']; ?></td>
+                                            
 
-                                             <td><?php 
-                                            if ($row_attendance['time_out'] == ''){
-                                                echo 'No time recorded';
-                                            }else{
-                                                echo $row_attendance['time_out'];
-                                            }
-                                             ?>
-                                             </td>
+                                            
 
                                             <td><?php 
                                             if ($row_attendance['date'] == ''){
-                                                echo 'Absent';
+                                                echo '<p style="color: red; font-weight: bold;">Absent</p>';
                                             }else{
                                                 echo $row_attendance['date'];
                                             }
@@ -109,10 +122,11 @@
 
                     
 
-                <a href="../controllers/ExportAll.php"><button class="btn btn-primary" type="button">Export to Xls</button></a>
-
+                <a href="../controllers/ExportAll.php?department=<?= $department ?>"><button class="btn btn-primary" type="button">Export to Xls</button></a>
+                
+                <a href="#" data-toggle="modal" data-target="#deleteModal"><button class="btn btn-danger" type="button">Delete Database Record</button></a>
   
-                        
+               
 
 
 
@@ -152,6 +166,26 @@
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="../controllers/logout.php">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Database?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Are you sure you want to delete database contents of the previous month?</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger" href="../controllers/DeleteAttendance.php">Delete</a>
                 </div>
             </div>
         </div>

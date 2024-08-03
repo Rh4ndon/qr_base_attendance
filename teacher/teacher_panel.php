@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Scan Sync</title>
+    <title>QR Scan</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -63,6 +63,10 @@
                     </center>
                     <script src="https://unpkg.com/html5-qrcode"></script>
     <script>
+    <?php 
+    $date = date("m-d-y");
+    ?>
+
         function domReady(fn) {
     if (
         document.readyState === "complete" ||
@@ -78,21 +82,32 @@ domReady(function () {
  
     // If found you qr code
     function onScanSuccess(decodeText) {
+  
+        if (decodeText == 'RH4NDON<?php echo $date; ?>'){
 
-        if (decodeText == 'BNHS2024'){
-          
-            $.ajax({
-            url:"../controllers/AttendanceProcess.php",
-            method:"POST", 
-            dataType: "text",  //expect html to be returned  
-            data:{QRContent:decodeText,
-                  UserId:"<?php echo $row_teacher['user_id']; ?>"
-                  },//send extra parameters if needed   
-                success: function(data){
-                    //console.log(data);
-                    $('#recordModal').modal('show');
-            }
-            });
+         
+                $.ajax({
+                url: "../controllers/AttendanceProcess.php",
+                method: "POST",
+                data: {
+                    QRContent: decodeText,
+                    UserId: "<?php echo $row_teacher['user_id']; ?>"
+                },
+
+                success: function(data) {
+               
+      
+      
+                    var parsedData = $('<div/>').html(data).text();
+                    window.location.href = parsedData;
+
+        
+                }
+                });
+
+
+    
+
         } else {
             $('#wrongModal').modal('show');
         }
@@ -158,23 +173,10 @@ domReady(function () {
     </div>
 
 
-    <!-- Attendance Modal-->
-    <div class="modal fade" id="recordModal" tabindex="-1" role="dialog" aria-labelledby="attendanceModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Good day your attendance was successfully recorded!</div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="button" data-dismiss="modal">Ok</button>
-                </div>
-            </div>
-        </div>
-    </div>
+  
+
+
+
 
     <!-- Wrong QR Modal-->
     <div class="modal fade" id="wrongModal" tabindex="-1" role="dialog" aria-labelledby="attendanceModalLabel"
@@ -212,9 +214,7 @@ domReady(function () {
     <!-- Page level plugins -->
     <script src="../vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script>
+
 
 </body>
 

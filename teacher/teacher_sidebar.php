@@ -3,7 +3,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="teacher_panel.php">
                 <img src="../img/logo.png" height="200%">
-                <div class="sidebar-brand-text mx-3">Scan <sup>sync</sup></div>
+                <div class="sidebar-brand-text mx-3">QR <sup>scan</sup></div>
             </a>
 
             <!-- Divider -->
@@ -17,29 +17,7 @@
             </li>
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Tutorial</span>
-                </a>
-              
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" 
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>About Us</span>
-                </a>
-              
-            </li>        
+            <hr class="sidebar-divider">>
 
 
             <!-- Nav Item - Tables -->
@@ -48,6 +26,17 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>My Attendance Record</span></a>
             </li>
+
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="../../../projects.html" 
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Rhandon.tech</span>
+                </a>
+              
+            </li>      
 
 
             <!-- Divider -->

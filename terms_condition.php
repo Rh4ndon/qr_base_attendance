@@ -59,22 +59,13 @@
                 <p>By signing up for a ScanSync account, you confirm that you have read, understood, and agreed to these terms and conditions. Failure to comply with these terms may result in the termination of your ScanSync account.</p>
             </div>
             <h4>I Agree to the <span>Terms of Condition</span> and I read the Privacy Notice</h4>
-            <form method="POST">
+           
             <div class="buttons">
-                <button type="submit"name="back" class="btn red-btn">Accept</button>
-                <button class="btn gray-btn">Decline</button>
+                <button onclick="history.back()" type="submit"name="back" class="btn red-btn">Accept</button>
+                <button onclick="window.location.href = 'index.php';" class="btn gray-btn">Decline</button>
             </div>
-            </form>
+          
 </body>
 
 </html>
 
-<?php 
-
-if (isset($_POST['back'])){
-   
-        echo "<script> location.href='index.php'; </script>";
-    
-}
-
-?>

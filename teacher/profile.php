@@ -71,6 +71,12 @@
                                                 value="<?php echo $row_teacher['email']; ?>"
                                                 placeholder="Enter Email Address..." disabled>
                                         </div>
+                                        
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                value="<?php echo $row_teacher['username']; ?>"
+                                                placeholder="Enter Username..." disabled>
+                                        </div>
 
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"

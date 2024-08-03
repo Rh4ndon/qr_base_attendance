@@ -2,9 +2,9 @@
 @include '../models/dbconn.php';
 
 if (isset($_POST['register'])) {
-                           
+    $username = $_POST['username'];              
     $email = $_POST['email'];
-    $firstname = $_POST['firsname'];
+    $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $password = $_POST['password'];
     $gender = $_POST['gender'];
@@ -13,7 +13,7 @@ if (isset($_POST['register'])) {
     $birthday = $_POST['birthday'];
     
     
-    $query = mysqli_query($conn,"select * from teachers where email = '$email' && firstname = '$firstname' && lastname = '$lastname' ")or die(mysqli_error());
+    $query = mysqli_query($conn,"select * from teachers where username = '$username' && email = '$email' && firstname = '$firstname' && lastname = '$lastname' ")or die(mysqli_error());
     $count = mysqli_num_rows($query);
     
     if ($count > 0){ ?>
@@ -23,8 +23,8 @@ if (isset($_POST['register'])) {
     <?php
     }else{
 
-    mysqli_query($conn,"insert into teachers (email,firstname,lastname,password,gender,contact,department,birthday,picture)
-    values ('$email','$firstname','$lastname','$password','$gender','$contact','$department','$birthday','undraw_profile.svg')") or die(mysqli_error()); 
+    mysqli_query($conn,"insert into teachers (username,email,firstname,lastname,password,gender,contact,department,birthday,picture)
+    values ('$username','$email','$firstname','$lastname','$password','$gender','$contact','$department','$birthday','undraw_profile.svg')") or die(mysqli_error()); 
 
       /* teacher */
 		$query_teacher = mysqli_query($conn,"SELECT * FROM teachers WHERE email='$email' AND password='$password'")or die(mysqli_error());
@@ -40,6 +40,7 @@ if (isset($_POST['register'])) {
 if (isset($_POST['update'])) {
 
     $user_id = $_POST['user_id'];
+    $username = $_POST['username'];
     $email = $_POST['email'];
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
@@ -48,8 +49,6 @@ if (isset($_POST['update'])) {
     $contact = $_POST['contact'];
     $department = $_POST['department'];
     $birthday = $_POST['birthday'];
-    $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
-  
 
         /* admin */
 			$query = "SELECT * FROM users WHERE user_id ='$user_id'";
@@ -62,6 +61,12 @@ if (isset($_POST['update'])) {
 		$num_row_teacher = mysqli_num_rows($query_teacher);
 		
 		if( $num_row > 0 ) {
+		    
+		    if(empty($_FILES['image']['name'])) {
+		        
+		        mysqli_query($conn,"update users set username = '$username', firstname = '$firstname' , lastname = '$lastname' , email = '$email', password = '$password', gender ='$gender', contact = '$contact', department = '$department', birthday = '$birthday' where user_id = '$user_id' ")or die(mysqli_error());
+		        
+		    }else{
             
             $image_name = addslashes($_FILES['image']['name']);
             $image_size = getimagesize($_FILES['image']['tmp_name']);
@@ -69,13 +74,19 @@ if (isset($_POST['update'])) {
             move_uploaded_file($_FILES["image"]["tmp_name"], "../img/" . $_FILES["image"]["name"]);
             $location = "../img/" . $_FILES["image"]["name"];
 
-        mysqli_query($conn,"update users set firstname = '$firstname' , lastname = '$lastname' , email = '$email', password = '$password', gender ='$gender', contact = '$contact', department = '$department', birthday = '$birthday', picture = '$image_name' where user_id = '$user_id' ")or die(mysqli_error());
-
+        mysqli_query($conn,"update users set username = '$username', firstname = '$firstname' , lastname = '$lastname' , email = '$email', password = '$password', gender ='$gender', contact = '$contact', department = '$department', birthday = '$birthday', picture = '$image_name' where user_id = '$user_id' ")or die(mysqli_error());
+		    }
         session_start();
 		$_SESSION['id']=$row['user_id'];
 		echo "<script> location.href='../admin/profile.php'; </script>";
         exit();	
 		}else if ($num_row_teacher > 0){
+		    
+		    if(empty($_FILES['image']['name'])) {
+		        
+		        mysqli_query($conn,"update teachers set username = '$username', firstname = '$firstname' , lastname = '$lastname' , email = '$email', password = '$password', gender ='$gender', contact = '$contact', department = '$department', birthday = '$birthday' where user_id = '$user_id' ")or die(mysqli_error());
+		        
+		    } else {
 
             
             $image_name = addslashes($_FILES['image']['name']);
@@ -84,7 +95,8 @@ if (isset($_POST['update'])) {
             move_uploaded_file($_FILES["image"]["tmp_name"], "../img/" . $_FILES["image"]["name"]);
             $location = "../img/" . $_FILES["image"]["name"];
 
-        mysqli_query($conn,"update teachers set firstname = '$firstname' , lastname = '$lastname' , email = '$email', password = '$password', gender ='$gender', contact = '$contact', department = '$department', birthday = '$birthday', picture = '$image_name' where user_id = '$user_id' ")or die(mysqli_error());
+        mysqli_query($conn,"update teachers set username = '$username' ,firstname = '$firstname' , lastname = '$lastname' , email = '$email', password = '$password', gender ='$gender', contact = '$contact', department = '$department', birthday = '$birthday', picture = '$image_name' where user_id = '$user_id' ")or die(mysqli_error());
+		}
         
         session_start();
 		$_SESSION['id']=$row_teahcer['user_id'];
@@ -99,16 +111,16 @@ if (isset($_POST['update'])) {
 
 if (isset($_POST['login'])) {
 
-    $email = $_POST['email'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
         /* admin */
-			$query = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+			$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
 			$result = mysqli_query($conn,$query)or die(mysqli_error());
 			$row = mysqli_fetch_array($result);
 			$num_row = mysqli_num_rows($result);
 		/* teacher */
-		$query_teacher = mysqli_query($conn,"SELECT * FROM teachers WHERE email='$email' AND password='$password'")or die(mysqli_error());
+		$query_teacher = mysqli_query($conn,"SELECT * FROM teachers WHERE username='$username' AND password='$password'")or die(mysqli_error());
 		$row_teahcer = mysqli_fetch_array($query_teacher);
 		$num_row_teacher = mysqli_num_rows($query_teacher);
 		

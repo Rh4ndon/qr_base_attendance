@@ -1,0 +1,80 @@
+@media print {
+
+    .tasty-recipes-print-view .your-special-class {
+    display: none;
+    }
+    br {
+      display: none;
+    }
+
+    .text-primary {
+        color: black !important;
+        font-size: smaller;
+      
+    }
+
+    .btn{
+        display: none;
+    }
+    .margin3{
+      margin-top: -30px;
+      margin-bottom: -20px;
+    }
+    .margin2{
+      margin-top: -10px;
+    }
+    .margin{
+      margin-top: -30px;
+    }
+
+    table {
+      border: solid #000 !important;
+      border-width: 1px 0 0 1px !important;
+  }
+  th, td {
+      border: solid #000 !important;
+      border-width: 0 1px 1px 0 !important;
+  }
+  
+
+      tr{
+        margin: 0;
+        padding: 0;
+
+        height:3px;
+        font-size: xx-small;
+      }
+
+      footer{
+        display: none;
+      }
+
+}
+.underlined-input {
+    width: 50px; 
+    border: none;
+    outline: none;
+    background-color: transparent;
+    position: relative;
+    box-shadow: 0px 1px 0px 0px black;
+  }
+  
+  .underlined-input:after {
+ 
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background-color: black;
+  }
+
+  @media (max-width: 375px ){
+
+    .underlined-input {
+        width: 10px; 
+
+      }
+
+  }
+  

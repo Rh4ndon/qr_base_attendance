@@ -21,6 +21,7 @@
 
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
 
@@ -57,21 +58,25 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Time In</th>
-                                            <th>Time Out</th>
+                                            <th>AM Arrival</th>
+                                            <th>AM Departure</th>
+                                            <th>PM Arrival</th>
+                                            <th>PM Departure</th>
                                             <th>Date</th>
                                         </tr>
                                     </thead>
                                  
                                     <tbody>
                                         <?php 
-                                         $query_attendance= mysqli_query($conn,"SELECT date, MIN(time) AS time_in, MAX(time) AS time_out FROM attendance WHERE user_id = '$session_id' GROUP BY date ")or die(mysqli_error());
+                                         $query_attendance= mysqli_query($conn,"SELECT * FROM attendance WHERE user_id = '$session_id' ORDER BY date ASC")or die(mysqli_error());
                                          while ($row_attendance = mysqli_fetch_array($query_attendance)){?> 
             
                                         <tr>
                                             <td><?php echo $row_teacher['firstname']; ?> <?php echo $row_teacher['lastname']; ?></td>
-                                            <td><?php echo $row_attendance['time_in']; ?></td>
-                                            <td><?php echo $row_attendance['time_out']; ?></td>
+                                            <td><?php echo $row_attendance['am_time_in']; ?></td>
+                                            <td><?php echo $row_attendance['am_time_out']; ?></td>
+                                            <td><?php echo $row_attendance['pm_time_in']; ?></td>
+                                            <td><?php echo $row_attendance['pm_time_out']; ?></td>
                                             <td><?php echo $row_attendance['date']; ?></td>
                                         </tr> 
                                         <?php } ?>
@@ -85,7 +90,8 @@
                     <form method="POST"  action="../controllers/ExportTeacher.php">
                     <input type="hidden" name="user_id" value="<?php echo $row_teacher['user_id']; ?>">
                     <input type="hidden" name="name" value="<?php echo $row_teacher['lastname']; ?><?php echo $row_teacher['firstname']; ?>">
-                    <button class="btn btn-primary" name="export"type="submit">Export to Xls</button></a>
+                    <button class="btn btn-primary" name="export"type="submit">Export to Xls</button>
+                    <a href="teacher_print.php" class="btn btn-info" ><i class="bi bi-printer"></i> Printing page</a>
                     </form>
 
                           
@@ -148,9 +154,6 @@
     <!-- Page level plugins -->
     <script src="../vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script>
 
 </body>
 

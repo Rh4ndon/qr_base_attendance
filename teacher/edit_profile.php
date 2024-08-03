@@ -86,6 +86,13 @@
                                                 name="email"
                                                 placeholder="Enter Email Address...">
                                         </div>
+                                        <div class="form-group">
+                                            <label for="username">Username</label>
+                                            <input type="text" class="form-control form-control-user"
+                                                value="<?php echo $row_teacher['username']; ?>"
+                                                name="username"
+                                                placeholder="Enter Username...">
+                                        </div>
 
                                         <div class="form-group">
                                             <label for="password">Password</label>

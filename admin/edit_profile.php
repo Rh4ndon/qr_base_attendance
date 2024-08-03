@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Scan Sync</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -84,6 +84,14 @@
                                                 value="<?php echo $row_admin['email']; ?>"
                                                 name="email"
                                                 placeholder="Enter Email Address...">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="username">Username</label>
+                                            <input type="text" class="form-control form-control-user"
+                                                value="<?php echo $row_admin['username']; ?>"
+                                                name="username"
+                                                placeholder="Enter Username...">
                                         </div>
 
                                         <div class="form-group">

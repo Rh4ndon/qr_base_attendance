@@ -30,8 +30,8 @@
           </div>
           <div class="form-inner">
             <form action="controllers/UserController.php" method="POST" class="login">
-              <div class="field">
-                <input name="email" type="text" placeholder="Email Address" required>
+            <div class="field">
+                <input name="username" type="text" placeholder="Username" required>
               </div>
               <div class="field">
                 <input name="password" type="password" placeholder="Password" id="myInput" required>
@@ -43,8 +43,13 @@
                 <input name="login" type="submit" value="Login">
               </div>
               <div class="signup-link">Not a member? <a href="">Signup now</a></div>
+              <div class="signup-link">Back to <a href="../../projects.html">Rhandon.tech</a></div>
+             
             </form>
             <form action="controllers/UserController.php" method="POST" class="signup">
+            <div class="field">
+                <input name="username" type="text" placeholder="Username" required>
+              </div>
               <div class="field">
                 <input name="email" type="text" placeholder="Email Address" required>
               </div>
@@ -64,20 +69,34 @@
                 <input name="contact" type="number" placeholder="09123456789" max="9999999999" required>
               </div>
               <div class="field">
-                <input name="department" type="text" placeholder="Department/Subject" required>
+                <select name="department" type="text" placeholder="Last Name" required>
+                  <option>ARALING PANLIPUNAN</option>
+                  <option>EDUKASYON SA PAGPAPAKATAO</option>
+                  <option>ENGLISH</option>
+                  <option>FILIPINO</option>
+                  <option>MAPEH</option>
+                  <option>MATHEMATICS</option>
+                  <option>SCIENCE</option>
+                  <option>TLE</option>
+                </select>
               </div>
               
               <div class="field">
+              &nbsp; &nbsp;Birthday
                 <input name="birthday" type="date" placeholder="Birthday" required>
               </div>
               <div class="field">
+                <br>
                 <input name="password" type="password" placeholder="Password" required>
               </div>
-              <center><div class="pass-link"><input type="checkbox" required>&#160; &#160;<a href="terms_condition.php">Terms & Condition</a></div></center>
+              <br>
+              <!--center><div class="pass-link"><input type="checkbox" required>&#160; &#160;<a href="terms_condition.php">Terms & Condition</a></div></center-->
+             
               <div class="field btn">
                 <div class="btn-layer"></div>
-                <input name="register" type="submit" value="Signup">
+                <input name="register" type="submit" value="Signup" disabled>
               </div>
+              <center><div class="pass-link"><a href="../../projects.html">Back to Rhandon.tech</a></div></center>
             </form>
           </div>
         </div>

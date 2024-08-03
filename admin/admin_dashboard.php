@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>QR Scan</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -95,7 +95,21 @@
 
 
                         <div class="card-body">
-                            <center><img class="qr" src="BNHS2024.png"></center>
+                            
+                                    <center>
+                                    <div class="media-body align-items-center">
+                                        
+                                        <div class="qr-code-container">
+                                        <div class="qr-code" id="qr-code">
+
+                                        </div>
+                                        </div>
+
+                                    
+                                                                       
+                                    </div>
+                                    </center>
+
                         </div>
 
                     </div>
@@ -168,6 +182,49 @@
     <!-- Page level custom scripts -->
     <script src="../js/demo/chart-area-demo.js"></script>
     <script src="../js/demo/chart-pie-demo.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <?php 
+    $date = date("m-d-y");
+    ?>
+
+    <script>
+    let qr_code_element = document.querySelector(".qr-code");
+		var qrcode = new QRCode("qr-code",{
+            text: `RH4NDON<?php echo $date; ?>`,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+
+   /*
+    let download = document.createElement("button");
+
+ 
+    qr_code_element.appendChild(download);
+
+    let download_link = document.createElement("a");
+    download_link.setAttribute("download", "admin.png");
+    download_link.innerHTML = `Download <i class="fa-solid fa-download"></i>`;
+
+    download.appendChild(download_link);
+    */
+
+    let qr_code_img = document.querySelector(".qr-code img");
+    let qr_code_canvas = document.querySelector("canvas");
+
+    if (qr_code_img.getAttribute("src") == null) {
+      setTimeout(() => {
+        download_link.setAttribute("href", `${qr_code_img.getAttribute("src")}`);
+      }, 300);
+    } else {
+      setTimeout(() => {
+        download_link.setAttribute("href", `${qr_code_img.getAttribute("src")}`);
+      }, 300);
+    }
+
+	</script>
 
 </body>
 
